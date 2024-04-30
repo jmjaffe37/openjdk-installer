@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Include>
   <!-- Setup UI strings. -->
   <?if $(env.PLATFORM)="x86"?>
@@ -61,7 +61,7 @@
     <?define license_shown="1" ?>
   <?elseif $(var.JVM)="hotspot" ?>
     <?define license="license-GPLv2+CE.en-us.rtf" ?>
-    <?define license_shown="0" ?>
+    <?define license_shown="1" ?>
   <?else?>
     <?define license="no licence defined for $(var.JVM)" ?>
     <?define license_shown="1" ?>
