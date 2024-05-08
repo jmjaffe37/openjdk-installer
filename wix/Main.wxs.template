@@ -381,7 +381,8 @@
         </Directory>
       </Directory>
     <?else?>
-      <!-- unknown arch > build must be failed without directory-->
+      <!-- unknown arch > build must be failed without directory-->\
+
     <?endif?>
   </Package>
 </Wix>
