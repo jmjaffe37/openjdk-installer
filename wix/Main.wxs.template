@@ -367,7 +367,7 @@
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaEXE" Source="bin\java.exe">
+            <File Id="JavaExeFile" Source="bin\java.exe">
               <msix:Application Id="OpenJDKApplication" />
             </File>
           </Directory>
@@ -377,7 +377,7 @@
       <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaEXE" Source="bin\java.exe">
+            <File Id="JavaExeFile" Source="bin\java.exe">
               <msix:Application Id="OpenJDKApplication" />
             </File>
           </Directory>
@@ -387,7 +387,7 @@
       <Directory Id="ProgramFiles64Folder"> <!-- ARM64 is 64bit -->
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaEXE" Source="bin\java.exe">
+            <File Id="JavaExeFile" Source="bin\java.exe">
               <msix:Application Id="OpenJDKApplication" />
             </File>
           </Directory>
