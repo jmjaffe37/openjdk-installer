@@ -387,9 +387,9 @@
     <msix:Msix Id="MsixInfo" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
     <msix:Application Id="OpenJDKApplication" ExecutableFile="java.exe" />
 
-    <Component Directory="[INSTALLDIR]">
+    <Component Directory="INSTALLDIR">
       <File Id="JavaEXE" Source="bin\java.exe">
-        <msix:Application Id="OpenJdkMsix" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" OverrideDisplayName="My Desktop Bridged Application" />
+        <msix:Application Id="OpenJDKApplication" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" OverrideDisplayName="My Desktop Bridged Application" />
       </File>
     </Component>
   </Package>
