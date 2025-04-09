@@ -384,12 +384,11 @@
     <?else?>
       <!-- unknown arch > build must be failed without directory-->
     <?endif?>
-    <msix:Msix Id="MsixInfo" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
-    <msix:Application Id="OpenJDKApplication" ExecutableFile="java.exe" />
+    <msix:Msix Id="MsixMetadata" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
     <Component Directory="INSTALLDIR">
       <File Id="JavaEXE" Source="bin\java.exe">
-        <msix:Application Id="OpenJDKApplication" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" OverrideDisplayName="My Desktop Bridged Application" />
+        <msix:Application Id="OpenJDKApplication" />
       </File>
     </Component>
   </Package>
