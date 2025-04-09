@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
   xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util"
-  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui"
+  xmlns:msix="http://www.firegiant.com/schemas/v4/wxs/heatwave/buildtools/msix">
   <?include $(sys.CURRENTDIR)\Workdir\$(var.OutputBaseFilename)-$(var.ProductSku).Variables.wxi?>
 
   <Package Name="$(var.ProductNameWithVersion)" Language="$(var.ProductLanguage)"
@@ -383,5 +384,7 @@
     <?else?>
       <!-- unknown arch > build must be failed without directory-->
     <?endif?>
+    <msix:Msix Id="MsixInfo" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
+    <msix:Application Id="OpenJDKApplication" ExecutableFile="bin\java.exe" />
   </Package>
 </Wix>

@@ -18,6 +18,7 @@
   <?define ProductVersion="$(var.MSIProductVersion)" ?>
   <?define ProductLanguage="!(loc.ProductLanguage)" ?>
   <?define ProductManufacturer="{vendor}" ?>
+  <?define MsixPublisher="{MsixPublisher}" ?>
 
   <?if $(env.PRODUCT_CATEGORY)="jre"?>
     <?define ProductName="!(loc.JREProductName)" ?>

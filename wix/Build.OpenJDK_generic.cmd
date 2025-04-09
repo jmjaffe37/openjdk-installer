@@ -13,7 +13,7 @@ REM PRODUCT_CATEGORY=jre|jdk (only one at a time)
 REM SKIP_MSI_VALIDATION=true (Add -sval option to light.exe to skip MSI/MSM validation and skip smoke.exe )
 REM UPGRADE_CODE_SEED=thisIsAPrivateSecretSeed ( optional ) for upgradable MSI (If none, new PRODUCT_UPGRADE_CODE is generate for each run)
 REM OUTPUT_BASE_FILENAME=customFileName (optional) for setting file names that are not based on the default naming convention
-REM WIX_VERSION=5.0.2 (optional) for setting the version of Wix Toolset to use
+REM WIX_VERSION=5.0.1 (optional) for setting the version of Wix Toolset to use
 
 SETLOCAL ENABLEEXTENSIONS
 SET ERR=0
@@ -38,7 +38,8 @@ IF NOT DEFINED PRODUCT_HELP_LINK SET PRODUCT_HELP_LINK=https://github.com/adopti
 IF NOT DEFINED PRODUCT_SUPPORT_LINK SET PRODUCT_SUPPORT_LINK=https://adoptium.net/support
 IF NOT DEFINED PRODUCT_UPDATE_INFO_LINK SET PRODUCT_UPDATE_INFO_LINK=https://adoptium.net/temurin/releases
 IF NOT DEFINED WIX_HEAT_PATH SET WIX_HEAT_PATH=.\Resources\heat_dir\heat.exe
-IF NOT DEFINED WIX_VERSION SET WIX_VERSION=5.0.2
+IF NOT DEFINED WIX_VERSION SET WIX_VERSION=5.0.1
+@REM IF NOT DEFINED MSIX_PUBLISHER SET MSIX_PUBLISHER=None
 
 REM default windows_SDK version
 REM See folder e.g. "C:\Program Files (x86)\Windows Kits\[10]\bin\[10.0.22621.0]\!PLATFORM!"
@@ -90,6 +91,11 @@ mkdir %WORKDIR%
 @REM Add necessary wix extensions here
 wix extension add WixToolset.UI.wixext/%WIX_VERSION%
 wix extension add WixToolset.Util.wixext/%WIX_VERSION%
+wix extension add FireGiant.HeatWave.BuildTools.Msix.wixext/%WIX_VERSION%
+@REM IF NOT "%MSIX_PUBLISHER%" == "None" (
+@REM     @REM at time of writing this, the FireGant.HeatWave.BuildTools.Msix.wixext extension's latest version is 5.0.1 (which is behind the other extensions)
+@REM     wix extension add FireGiant.HeatWave.BuildTools.Msix.wixext/%WIX_VERSION%
+@REM )
 
 REM
 REM Nothing below this line need to be changed normally.
@@ -281,6 +287,7 @@ FOR %%A IN (%ARCH%) DO (
     @ECHO OFF
 
     ECHO BUILD
+    @REM NOTE: ADD MSIX LOGIC HERE
     @ECHO ON
     wix build -arch !PLATFORM! ^
         %WORKDIR%!OUTPUT_BASE_FILENAME!-Main.wxs ^
@@ -288,6 +295,7 @@ FOR %%A IN (%ARCH%) DO (
         !ITW_WXS! ^
         -ext WixToolset.UI.wixext ^
         -ext WixToolset.Util.wixext ^
+        -ext FireGiant.HeatWave.BuildTools.Msix.wixext ^
         -d IcedTeaWebDir="!ICEDTEAWEB_DIR!" ^
         -d OutputBaseFilename="!OUTPUT_BASE_FILENAME!" ^
         -d ProductSku="!PRODUCT_SKU!" ^
@@ -305,10 +313,11 @@ FOR %%A IN (%ARCH%) DO (
         -loc "%WORKDIR%!OUTPUT_BASE_FILENAME!-!PRODUCT_SKU!.Base.!CULTURE!.wxl" ^
         -loc "%WORKDIR%!OUTPUT_BASE_FILENAME!-!PRODUCT_SKU!.!TEMPLATE_NAME!.!CULTURE!.wxl" ^
         -out "ReleaseDir\!OUTPUT_BASE_FILENAME!.msi" ^
+        -out "ReleaseDir\!OUTPUT_BASE_FILENAME!.msix" ^
         -culture !CULTURE! ^
         -pdbtype none
     IF ERRORLEVEL 1 (
-        ECHO Failed to process and compile Windows Installer XML Source files ^(.wxs^) into installer ^(.msi^)
+        ECHO Failed to process and compile Windows Installer XML Source files ^(.wxs^) into installer ^(.msi/.msix^)
         dir /s /b /o:n %WORKDIR%
         GOTO FAILED
     )

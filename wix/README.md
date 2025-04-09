@@ -25,7 +25,7 @@ call powershell.exe ./CreateSourceFolder.AdoptOpenJDK.ps1 ^
   -openjdk_filename_regex "^OpenJDK(?<major>\d*)" ^
   -platform_regex "(?<platform>x86-32|x64|aarch64)" ^
   -jvm_regex "(?<jvm>hotspot|openj9|dragonwell)" ^
-  -wix_version "5.0.2"
+  -wix_version "5.0.1"
 ```
 
 3. Export the following environment variables:
@@ -69,6 +69,20 @@ call powershell.exe ./CreateSourceFolder.AdoptOpenJDK.ps1 ^
 4. Run `Build.OpenJDK_generic.cmd` to create the MSI setup in "ReleaseDir":
 
 ```batch
+call Build.OpenJDK_generic.cmd
+```
+
+################################################ update this before PR
+## How to generate MSIX packages
+
+The build process now supports generating MSIX packages alongside MSI packages. To enable MSIX generation, ensure the following:
+
+1. Install the FireGiant MSIX Extension for WiX.
+2. Run the `Build.OpenJDK_generic.cmd` script as usual. The MSIX package will be created in the `ReleaseDir` folder alongside the MSI package.
+3. The MSIX package will include the necessary AppxManifest and other metadata required for deployment on Windows 10 and later.
+
+Example command:
+```cmd
 call Build.OpenJDK_generic.cmd
 ```
 
