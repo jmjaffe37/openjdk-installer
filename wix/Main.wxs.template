@@ -366,19 +366,31 @@
     <?if $(env.Platform)=x86?>
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
+            <File Id="JavaEXE" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
+          </Directory>
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=x64?>
       <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
+            <File Id="JavaEXE" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
+          </Directory>
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=arm64?>
       <Directory Id="ProgramFiles64Folder"> <!-- ARM64 is 64bit -->
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
+            <File Id="JavaEXE" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
+          </Directory>
         </Directory>
       </Directory>
     <?else?>
@@ -386,10 +398,5 @@
     <?endif?>
     <msix:Msix Id="MsixMetadata" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" />
 
-    <Component Directory="INSTALLDIR">
-      <File Id="JavaEXE" Source="bin\java.exe">
-        <msix:Application Id="OpenJDKApplication" />
-      </File>
-    </Component>
   </Package>
 </Wix>
