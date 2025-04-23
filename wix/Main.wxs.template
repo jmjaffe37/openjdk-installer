@@ -372,31 +372,19 @@
     <?if $(env.Platform)=x86?>
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaExeFile" Source="bin\java.exe">
-              <msix:Application Id="OpenJDKApplication" />
-            </File>
-          </Directory>
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=x64?>
       <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaExeFile" Source="bin\java.exe">
-              <msix:Application Id="OpenJDKApplication" />
-            </File>
-          </Directory>
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=arm64?>
       <Directory Id="ProgramFiles64Folder"> <!-- ARM64 is 64bit -->
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <File Id="JavaExeFile" Source="bin\java.exe">
-              <msix:Application Id="OpenJDKApplication" />
-            </File>
-          </Directory>
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
         </Directory>
       </Directory>
     <?else?>
