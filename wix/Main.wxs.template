@@ -84,6 +84,11 @@
 
     <!-- Add the shortcuts to your installer package -->
     <DirectoryRef Id="INSTALLDIR">
+      <Component Id="MsixApplicationInfo">
+        <File Id="JavaExeFile" Source="bin\java.exe">
+          <msix:Application Id="OpenJDKApplication" />
+        </File>
+      </Component>
       <Component Id="CleanupMainInstallDir">
         <RegistryValue Root="HKMU"
           Key="SOFTWARE\$(var.ProductManufacturer)\$(var.ProductCategory)\$(var.ProductVersion)\$(var.JVM)\MSI"
@@ -237,6 +242,7 @@
       Title="$(var.FeatureMainName)" Description="$(var.FeatureMainDescription)" Display="expand"
       AllowAdvertise="no" InstallDefault="local" AllowAbsent="no">
       <ComponentRef Id="CleanupMainInstallDir" />
+      <ComponentRef Id="MsixApplicationInfo" />
       <ComponentGroupRef Id="AppFiles" />
       <Feature Id="FeatureEnvironment" Level="1" Title="!(loc.FeatureEnvironmentTitle)"
         Description="!(loc.FeatureEnvironmentDescription)" AllowAdvertise="no"
@@ -367,11 +373,9 @@
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <Component Id="MsixApplicationInfo">
-              <File Id="JavaExeFile" Source="bin\java.exe">
-                <msix:Application Id="OpenJDKApplication" />
-              </File>
-            </Component>
+            <File Id="JavaExeFile" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
           </Directory>
         </Directory>
       </StandardDirectory>
@@ -379,11 +383,9 @@
       <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <Component Id="MsixApplicationInfo">
-              <File Id="JavaExeFile" Source="bin\java.exe">
-                <msix:Application Id="OpenJDKApplication" />
-              </File>
-            </Component>
+            <File Id="JavaExeFile" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
           </Directory>
         </Directory>
       </StandardDirectory>
@@ -391,11 +393,9 @@
       <Directory Id="ProgramFiles64Folder"> <!-- ARM64 is 64bit -->
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
           <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" >
-            <Component Id="MsixApplicationInfo">
-              <File Id="JavaExeFile" Source="bin\java.exe">
-                <msix:Application Id="OpenJDKApplication" />
-              </File>
-            </Component>
+            <File Id="JavaExeFile" Source="bin\java.exe">
+              <msix:Application Id="OpenJDKApplication" />
+            </File>
           </Directory>
         </Directory>
       </Directory>
