@@ -228,7 +228,7 @@
     </DirectoryRef>
 
     <DirectoryRef Id="INSTALLDIRBIN">
-      <Component Id="MsixApplicationInfo">
+      <Component Id="MsixComponent">
         <File Id="JavaExeFile" Name="java.exe">
           <msix:Application Id="OpenJDKApplication" />
         </File>
@@ -245,7 +245,10 @@
       Title="$(var.FeatureMainName)" Description="$(var.FeatureMainDescription)" Display="expand"
       AllowAdvertise="no" InstallDefault="local" AllowAbsent="no">
       <ComponentRef Id="CleanupMainInstallDir" />
-      <ComponentRef Id="MsixApplicationInfo" />
+      <Feature Id="MsixFeature" Level="1" ConfigurableDirectory="INSTALLDIRBIN"
+        AllowAdvertise="no" InstallDefault="followParent">
+        <ComponentRef Id="MsixComponent" />
+      </Feature>
       <ComponentGroupRef Id="AppFiles" />
       <Feature Id="FeatureEnvironment" Level="1" Title="!(loc.FeatureEnvironmentTitle)"
         Description="!(loc.FeatureEnvironmentDescription)" AllowAdvertise="no"
