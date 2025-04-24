@@ -84,13 +84,6 @@
 
     <!-- Add the shortcuts to your installer package -->
     <DirectoryRef Id="INSTALLDIR">
-      <Directory Id="INSALLDIRBIN" SourceName="bin">
-        <Component Id="MsixApplicationInfo">
-          <File Id="JavaExeFile" Name="java.exe">
-            <msix:Application Id="OpenJDKApplication" />
-          </File>
-        </Component>
-      </Directory>
       <Component Id="CleanupMainInstallDir">
         <RegistryValue Root="HKMU"
           Key="SOFTWARE\$(var.ProductManufacturer)\$(var.ProductCategory)\$(var.ProductVersion)\$(var.JVM)\MSI"
@@ -234,6 +227,14 @@
       <?endif?>
     </DirectoryRef>
 
+    <DirectoryRef Id="INSTALLDIRBIN">
+      <Component Id="MsixApplicationInfo">
+        <File Id="JavaExeFile" Name="java.exe">
+          <msix:Application Id="OpenJDKApplication" />
+        </File>
+      </Component>
+    </DirectoryRef>
+
     <Property Id="JAVASOFT_CURRENTVERSION">
       <RegistrySearch Id="JAVASOFT_CURRENTVERSION" Root="HKLM"
         Key="SOFTWARE\JavaSoft\$(var.OracleJavasoftBaseKey)" Name="CurrentVersion" Type="raw" />
@@ -374,19 +375,25 @@
     <?if $(env.Platform)=x86?>
       <StandardDirectory Id="ProgramFilesFolder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)">
+            <Directory Id="INSTALLDIRBIN" Name="bin" />
+          </Directory>
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=x64?>
       <StandardDirectory Id="ProgramFiles64Folder">
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)">
+            <Directory Id="INSTALLDIRBIN" Name="bin" />
+          </Directory>
         </Directory>
       </StandardDirectory>
     <?elseif $(env.Platform)=arm64?>
       <Directory Id="ProgramFiles64Folder"> <!-- ARM64 is 64bit -->
         <Directory Id="PRODUCTMANUFACTURER" Name="$(var.ProductManufacturer)">
-          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)" />
+          <Directory Id="INSTALLDIR" Name="$(var.AppFolder)">
+            <Directory Id="INSTALLDIRBIN" Name="bin" />
+          </Directory>
         </Directory>
       </Directory>
     <?else?>
