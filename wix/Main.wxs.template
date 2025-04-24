@@ -86,7 +86,7 @@
     <DirectoryRef Id="INSTALLDIR">
       <Directory Id="INSALLDIRBIN" Name="bin">
         <Component Id="MsixApplicationInfo">
-          <File Id="JavaExeFile" Source="java.exe">
+          <File Id="JavaExeFile" Source="[INSALLDIRBIN]\javaw.exe">
             <msix:Application Id="OpenJDKApplication" />
           </File>
         </Component>
