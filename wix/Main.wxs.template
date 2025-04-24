@@ -245,10 +245,6 @@
       Title="$(var.FeatureMainName)" Description="$(var.FeatureMainDescription)" Display="expand"
       AllowAdvertise="no" InstallDefault="local" AllowAbsent="no">
       <ComponentRef Id="CleanupMainInstallDir" />
-      <Feature Id="MsixFeature" Level="1" ConfigurableDirectory="INSTALLDIRBIN"
-        AllowAdvertise="no" InstallDefault="followParent">
-        <ComponentRef Id="MsixComponent" />
-      </Feature>
       <ComponentGroupRef Id="AppFiles" />
       <Feature Id="FeatureEnvironment" Level="1" Title="!(loc.FeatureEnvironmentTitle)"
         Description="!(loc.FeatureEnvironmentDescription)" AllowAdvertise="no"
@@ -304,6 +300,11 @@
     AllowAdvertise="no" InstallDefault="local">
       <ComponentGroupRef Id="SrcFiles" />
     </Feature> -->
+
+    <Feature Id="MsixFeature" Level="1" ConfigurableDirectory="INSTALLDIRBIN"
+      AllowAdvertise="no" InstallDefault="local">
+      <ComponentRef Id="MsixComponent" />
+    </Feature>
 
     <WixVariable Id="WixUILicenseRtf" Value="$(var.SetupResourcesDir)\$(var.license)" />
     <WixVariable Id="WixUIDialogBmp" Value="{vendor_branding_dialog}" />
