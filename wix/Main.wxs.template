@@ -84,13 +84,13 @@
 
     <!-- Add the shortcuts to your installer package -->
     <DirectoryRef Id="INSTALLDIR">
-      <Component Id="MsixApplicationInfo">
-        <Directory Id="INSALLDIRBIN" Name="bin">
-          <File Id="JavaExeFile" Source="java.exe">
+      <Directory Id="INSALLDIRBIN" Name="bin">
+        <Component Id="MsixApplicationInfo">
+          <File Id="JavaExeFile" Name="java.exe">
             <msix:Application Id="OpenJDKApplication" />
           </File>
-        </Directory>
-      </Component>
+        </Component>
+      </Directory>
       <Component Id="CleanupMainInstallDir">
         <RegistryValue Root="HKMU"
           Key="SOFTWARE\$(var.ProductManufacturer)\$(var.ProductCategory)\$(var.ProductVersion)\$(var.JVM)\MSI"
