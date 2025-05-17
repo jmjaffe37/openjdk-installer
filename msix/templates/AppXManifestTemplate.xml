@@ -35,7 +35,7 @@ Variables to replace:
     <DisplayName>{MSIX_DISPLAYNAME}</DisplayName>
     <PublisherDisplayName>{VENDOR}</PublisherDisplayName>
     <Description>{DESCRIPTION}</Description>
-    <Logo>_msix_logos/duke50.png</Logo>
+    <Logo>_installation_resouces/msix_logos/duke50.png</Logo>
     <desktop6:RegistryWriteVirtualization>disabled</desktop6:RegistryWriteVirtualization>
     <desktop6:FileSystemWriteVirtualization>disabled</desktop6:FileSystemWriteVirtualization>
     <uap17:UpdateWhileInUse>defer</uap17:UpdateWhileInUse>
@@ -58,8 +58,8 @@ Variables to replace:
                   desktop4:Subsystem="console">
       <uap:VisualElements DisplayName="java"
                           Description="Run java files with java.exe"
-                          Square150x150Logo="_msix_logos/duke150.png"
-                          Square44x44Logo="_msix_logos/duke44.png"
+                          Square150x150Logo="_installation_resouces/msix_logos/duke150.png"
+                          Square44x44Logo="_installation_resouces/msix_logos/duke44.png"
                           BackgroundColor="transparent">
       </uap:VisualElements>
       <Extensions>
@@ -77,8 +77,8 @@ Variables to replace:
                   desktop4:Subsystem="console">
       <uap:VisualElements DisplayName="javaw"
                           Description="Run javaw.exe"
-                          Square150x150Logo="_msix_logos/duke150.png"
-                          Square44x44Logo="_msix_logos/duke44.png"
+                          Square150x150Logo="_installation_resouces/msix_logos/duke150.png"
+                          Square44x44Logo="_installation_resouces/msix_logos/duke44.png"
                           BackgroundColor="transparent">
       </uap:VisualElements>
       <Extensions>
@@ -100,8 +100,18 @@ Variables to replace:
       </Extensions>
     </Application>
   </Applications>
+  <Extensions>
+    <desktop6:Extension Category="windows.customInstall">
+      <desktop6:CustomInstall Folder="_installation_resouces/scripts">
+        <desktop6:InstallActions>
+          <desktop6:InstallAction File="Agreement.exe" Name="JDK_1"/>
+        </desktop6:InstallActions>
+      </desktop6:CustomInstall>
+    </desktop6:Extension>
+  </Extensions>
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
     <rescap:Capability Name="unvirtualizedResources" />
+    <rescap:Capability Name="customInstallActions"/>
   </Capabilities>
 </Package>
