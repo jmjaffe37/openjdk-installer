@@ -358,7 +358,7 @@ $InnoSetupArgs += "/DSourceFiles=`"$unzippedFolder`""
 
 # Set this flag to support unofficial inno_setup translations like Chinese
 ## Note: Here, unofficial means that there are a few default messages that do not
-##       have translations (from English) supported by Inno Setup yet
+##       have translations (from English) that are fully supported by Inno Setup yet
 if ($IncludeUnofficialTranslations -ne "false") {
     Write-Host "Including unofficial translations."
     $InnoSetupArgs += '/DINCLUDE_UNOFFICIAL_TRANSLATIONS="true"'
