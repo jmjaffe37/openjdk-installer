@@ -104,6 +104,11 @@
     This can be a path relative to the `installer/inno_setup` directory, or this can be an absolute path.
     Default: "translations\default.iss"
 
+.Parameter UnofficialTranslationFile
+    Optional. The path to the unofficial translation file .iss containing text translations for the installer's custom messages that are not fully translated by Inno Setup yet.
+    This can be a path relative to the `installer/inno_setup` directory, or this can be an absolute path.
+    Default: "translations/default_chinese.iss"
+
 .PARAMETER IncludeUnofficialTranslations
     Optional. Set this flag to support unofficial Inno Setup translations like Chinese.
     ## Note: Here, unofficial means that there are a few default messages that do not
@@ -161,6 +166,7 @@
         -License "licenses/license-GPLv2+CE.en-us.rtf" `
         -UpgradeCodeSeed "MySecretSeedCode(SameAsWix)" `
         -TranslationFile "translations/default.iss" `
+        -UnofficialTranslationFile "translations/default_chinese.iss" ` # Note: if this input is equal to the default, you need to also specify: -IncludeUnofficialTranslations "true" `
         # Additional Optional Inputs: Omitting these inputs will cause their associated process to be skipped
         -IncludeUnofficialTranslations "true" `
         -SigningCommand "signtool.exe sign /f C:\path\to\cert"
@@ -250,6 +256,9 @@ param (
 
     [Parameter(Mandatory = $false)]
     [string]$TranslationFile = "translations\default.iss",
+
+    [Parameter(Mandatory = $false)]
+    [string]$UnofficialTranslationFile = "translations/default_chinese.iss",
 
     [Parameter(Mandatory = $false)]
     [string]$IncludeUnofficialTranslations = "false",
@@ -359,9 +368,9 @@ $InnoSetupArgs += "/DSourceFiles=`"$unzippedFolder`""
 # Set this flag to support unofficial inno_setup translations like Chinese
 ## Note: Here, unofficial means that there are a few default messages that do not
 ##       have translations (from English) that are fully supported by Inno Setup yet
-if ($IncludeUnofficialTranslations -ne "false") {
+if ($IncludeUnofficialTranslations -ne "false" -or $IncludeUnofficialTranslations -ne "translations/default_chinese.iss") {
     Write-Host "Including unofficial translations."
-    $InnoSetupArgs += '/DINCLUDE_UNOFFICIAL_TRANSLATIONS="true"'
+    $InnoSetupArgs += "/J$UnofficialTranslationFile"
 }
 
 # Sign only if $SigningCommand is not empty or null

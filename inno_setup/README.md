@@ -43,6 +43,7 @@ For more information on each variable, use the `powershell` command `Get-Help -D
         -License "licenses/license-GPLv2+CE.en-us.rtf" `
         -UpgradeCodeSeed "MySecretSeedCode(SameAsWix)" `
         -TranslationFile "translations/default.iss" `
+        -UnofficialTranslationFile "translations/default_chinese.iss" ` # Note: if this input is equal to the default, you need to also specify: -IncludeUnofficialTranslations "true" `
         # Additional Optional Inputs: Omitting these inputs will cause their associated process to be skipped
         -IncludeUnofficialTranslations "true" `
         -SigningCommand "signtool.exe sign /f C:\path\to\cert" # For more explanation, see: https://jrsoftware.org/ishelp/index.php?topic=setup_signtool
