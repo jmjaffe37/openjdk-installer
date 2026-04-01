@@ -1,4 +1,4 @@
-; This file contains translations for all text in the resulting EXE installer.
+; This file contains default translations for all text in the resulting EXE installer.
 ; [Languages]: contains the list of languages we support. Inno Setup uses the compiler to translate default installer text.
 ; [CustomMessages]: contains the list of translations for the custom tasks that the user can select during installation.
 
