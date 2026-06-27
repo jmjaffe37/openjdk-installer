@@ -44,7 +44,6 @@ For more information on each variable, use the `powershell` command `Get-Help -D
         -UpgradeCodeSeed "MySecretSeedCode(SameAsWix)" `
         -TranslationFile "translations/default.iss" `
         # Additional Optional Inputs: Omitting these inputs will cause their associated process to be skipped
-        -IncludeUnofficialTranslations "true" `
         -SigningCommand "signtool.exe sign /f C:\path\to\cert" # For more explanation, see: https://jrsoftware.org/ishelp/index.php?topic=setup_signtool
 ```
 

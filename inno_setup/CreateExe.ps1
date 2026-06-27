@@ -104,12 +104,6 @@
     This can be a path relative to the `installer/inno_setup` directory, or this can be an absolute path.
     Default: "translations\default.iss"
 
-.PARAMETER IncludeUnofficialTranslations
-    Optional. Set this flag to support unofficial Inno Setup translations like Chinese.
-    ## Note: Here, unofficial means that there are a few default messages that do not
-    ##       have translations (from English) supported by Inno Setup yet.
-    Default: "false"
-
 .PARAMETER SigningCommand
     Optional. The command to sign the resulting EXE file. This is typically a command that
     uses signtool.exe to sign the EXE file. If this is not provided, the EXE will not be signed.
@@ -162,7 +156,6 @@
         -UpgradeCodeSeed "MySecretSeedCode(SameAsWix)" `
         -TranslationFile "translations/default.iss" `
         # Additional Optional Inputs: Omitting these inputs will cause their associated process to be skipped
-        -IncludeUnofficialTranslations "true" `
         -SigningCommand "signtool.exe sign /f C:\path\to\cert"
 
 .NOTES
@@ -250,9 +243,6 @@ param (
 
     [Parameter(Mandatory = $false)]
     [string]$TranslationFile = "translations\default.iss",
-
-    [Parameter(Mandatory = $false)]
-    [string]$IncludeUnofficialTranslations = "false",
 
     [Parameter(Mandatory = $false)]
     [string]$SigningCommand = ""
@@ -355,14 +345,6 @@ $InnoSetupArgs += "/DVendorBrandingSmallIcon=`"$VendorBrandingSmallIcon`""
 $InnoSetupArgs += "/DLicenseFile=`"$License`""
 $InnoSetupArgs += "/DAppId=`"$AppId`""
 $InnoSetupArgs += "/DSourceFiles=`"$unzippedFolder`""
-
-# Set this flag to support unofficial inno_setup translations like Chinese
-## Note: Here, unofficial means that there are a few default messages that do not
-##       have translations (from English) supported by Inno Setup yet
-if ($IncludeUnofficialTranslations -ne "false") {
-    Write-Host "Including unofficial translations."
-    $InnoSetupArgs += '/DINCLUDE_UNOFFICIAL_TRANSLATIONS="true"'
-}
 
 # Sign only if $SigningCommand is not empty or null
 # See the following link for more info on Inno Setup signing: https://jrsoftware.org/ishelp/index.php?topic=setup_signtool

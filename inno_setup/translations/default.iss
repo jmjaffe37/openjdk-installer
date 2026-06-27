@@ -8,14 +8,8 @@ Name: "German";     MessagesFile: "compiler:Languages\German.isl"
 Name: "Spanish";    MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "French";     MessagesFile: "compiler:Languages\French.isl"
 Name: "Japanese";   MessagesFile: "compiler:Languages\Japanese.isl"
-
-#ifdef INCLUDE_UNOFFICIAL_TRANSLATIONS
-
-; Note: ChineseTW and ChineseCN still need translations for certain progress-bar screen messages
-Name: "ChineseTW";  MessagesFile: "compiler:Languages\Unofficial\ChineseTraditional.isl"
-Name: "ChineseCN";  MessagesFile: "compiler:Languages\Unofficial\ChineseSimplified.isl"
-
-#endif
+Name: "ChineseTW";  MessagesFile: "compiler:Languages\ChineseTraditional.isl"
+Name: "ChineseCN";  MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 [CustomMessages]
 ; Notes:
@@ -69,8 +63,6 @@ French.FeatureOracleJavaSoftTitle=Clés de registre JavaSoft (Oracle)
 ; Japanese.FeatureJarFileRunWithTitle=.jarを関連付け
 ; Japanese.FeatureOracleJavaSoftTitle=JavaSoft (Oracle) レジストリキー
 
-#ifdef INCLUDE_UNOFFICIAL_TRANSLATIONS
-
 ChineseCN.FeatureEnvironmentDesc=通过将 JDK 安装路径添加到 PATH 值开头来修改 PATH 环境变量值.
 ChineseCN.FeatureJavaHomeDesc=使用 JDK 安装路径来设置或重写 JAVA_HOME 环境变量值.
 ; ChineseCN.FeatureOracleJavaSoftDesc=覆盖 Oracle 的注册表项 HKLM\Software\JavaSoft。卸载 %1 后，需要重新安装 Oracle Java 以重新创建这些注册表项。
@@ -86,5 +78,3 @@ ChineseTW.FeatureEnvironmentTitle=修改 PATH 變數值
 ChineseTW.FeatureJavaHomeTitle=設定或重寫 JAVA_HOME 變量
 ; ChineseTW.FeatureJarFileRunWithTitle=關聯 .jar
 ; ChineseTW.FeatureOracleJavaSoftTitle=JavaSoft (Oracle) 登錄機碼
-
-#endif
